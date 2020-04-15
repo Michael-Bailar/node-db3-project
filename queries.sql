@@ -17,9 +17,22 @@
     FROM OrderDetail as O
     LEFT JOIN Product as P on O.ProductId = P.Id
     WHERE O.OrderId = 10251
-    
+
 -- Display the OrderID, Customer's Company Name and the employee's LastName for every order. All columns should be labeled clearly. Displays 16,789 records.
     SELECT [Order].id, Customer.CompanyName, Employee.LastName
     FROM [Order]
     Join Customer on [Order].Customerid = Customer.id
     JOIN Employee on [Order].EmployeeId = Employee.Id
+
+-- stretch in W3 SQL -- Displays CategoryName and a new column called Count that shows how many products are in each category. Shows 8 records.
+    SELECT DISTINCT(Categories.CategoryName), COUNT(Products.CategoryID) as Count
+    FROM Categories
+    JOIN Products on Categories.CategoryID = Products.CategoryID
+    GROUP BY Products.CategoryID
+    ORDER BY Categories.CategoryName
+
+-- stretch in W3 SQL -- Display OrderID and a column called ItemCount that shows the total number of products placed on the order. Shows 196 records.
+    SELECT DISTINCT(Orders.OrderID), COUNT(OrderDetails.ProductID) as ItemCount
+    FROM Orders
+    JOIN OrderDetails on Orders.OrderID = OrderDetails.OrderID
+    GROUP BY Orders.OrderID
