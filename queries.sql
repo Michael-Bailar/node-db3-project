@@ -7,16 +7,17 @@
 
 -- Display the order Id and shipper CompanyName for all orders placed before August 9 2012. Shows 429 records.
 -- gives 820?
-    SELECT [Order].Id, [Order].OrderDate, Shipper.CompanyName
-    FROM [Order]
-    INNER JOIN Shipper on [Order].ShipVia = Shipper.Id
-    WHERE [Order].OrderDate < '2012-09-09'
+    select [order].Id, shipper.CompanyName
+    from [order]
+    join shipper on shipper.Id = [order].ShipVia
+    where [order].OrderDate < date('2012-08-09')
 
 -- Display the name and quantity of the products ordered in order with Id 10251. Sort by ProductName. Shows 3 records.
     SELECT P.ProductName, O.Quantity, O.id
     FROM OrderDetail as O
     LEFT JOIN Product as P on O.ProductId = P.Id
     WHERE O.OrderId = 10251
+    
 -- Display the OrderID, Customer's Company Name and the employee's LastName for every order. All columns should be labeled clearly. Displays 16,789 records.
     SELECT [Order].id, Customer.CompanyName, Employee.LastName
     FROM [Order]
